@@ -1,17 +1,21 @@
-﻿using ASC.Web.Models;
+﻿using ASC.Web.Configuration;
+using ASC.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace ASC.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AnonymousController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IOptions<ApplicationSettings> _settings;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IOptions<ApplicationSettings> settings)
         {
             _logger = logger;
+            this._settings = settings;
         }
 
         public IActionResult Dashboard()
@@ -21,6 +25,9 @@ namespace ASC.Web.Controllers
 
         public IActionResult Index()
         {
+            //// set session test
+            //Response.Cookies.Append("Test", _settings.Value);
+
             return View();
         }
 
@@ -33,6 +40,18 @@ namespace ASC.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+            return View();
         }
     }
 }

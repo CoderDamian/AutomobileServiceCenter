@@ -9,5 +9,10 @@ namespace ASC.Web.Data
             : base(options)
         {
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(@"Data source = ASC_DB.db");
+        }
     }
 }

@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMyApplicationSettings(builder.Configuration);
-builder.Services.AddMyDataBase(builder.Configuration);
+builder.Services.AddMyDataBase();
 builder.Services.AddMyIndentity();
 
 builder.Services.AddControllersWithViews();
@@ -27,6 +27,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 //app.UseAuthentication();
 app.UseAuthorization();
