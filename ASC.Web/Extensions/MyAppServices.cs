@@ -14,26 +14,20 @@ namespace ASC.Web.Extensions
             services.Configure<ApplicationSettings>(configuration.GetSection("AppSettings"));
         }
 
-        public static void AddMyDataBase(this IServiceCollection services, IConfiguration configuration)
+        public static void AddMyDataBase(this IServiceCollection services)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            //var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
- //           services.AddDbContext<ApplicationDbContext>(options =>
- //options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDbContext<ApplicationDbContext>();
         }
 
         public static void AddMyIndentity(this IServiceCollection services)
         {
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
- //           services.AddIdentity<ApplicationUser, IdentityRole>()
- //.AddEntityFrameworkStores<ApplicationDbContext>()
- //.AddDefaultTokenProviders();
         }
 
         public static void AddAppicationServices(this IServiceCollection services)
