@@ -1,8 +1,8 @@
-﻿using ASC.Web.Configuration;
+﻿using ASC.Business;
+using ASC.Business.Contracts;
+using ASC.Web.Configuration;
 using ASC.Web.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace ASC.Web.Extensions
 {
@@ -35,5 +35,8 @@ namespace ASC.Web.Extensions
             //services.AddTransient<IEmailSender, AuthMessageSender>();
             //services.AddTransient<ISmsSender, AuthMessageSender>();
         }
+
+        public static void AddMyLogging(this IServiceCollection services)
+            => services.AddScoped<ILogDataOperations, LogDataOperations>();
     }
 }
